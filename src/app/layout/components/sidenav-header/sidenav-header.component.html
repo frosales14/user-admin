@@ -1,0 +1,13 @@
+<div class="pt-6 text-center flex flex-col items-center gap-4">
+	<img
+		[height]="pictureSize()"
+		[width]="pictureSize()"
+		src="https://images.unsplash.com/photo-1464863979621-258859e62245?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZmVtYWxlJTIwcHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D"
+		alt="profile picture"
+		class="rounded-full object-cover object-center transition-all ease-in-out"
+		[ngClass]="{ '!h-[32px] !w-[32px]': isCollapse(), '!h-[100px] !w-[100px]': !isCollapse() }"
+	/>
+	<div class="h-[50px] transition-all ease-in-out" [class.hide-header-text]="isCollapse()">
+		<span>Amalia Kilov</span>
+	</div>
+</div>

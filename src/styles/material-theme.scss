@@ -1,0 +1,20 @@
+@use '@angular/material' as mat;
+@include mat.core();
+
+$light-theme: mat.define-theme(
+	(
+		color: (
+			use-system-variables: true,
+		),
+		typography: (
+			use-system-variables: true,
+		),
+	)
+);
+
+:root {
+	@include mat.all-component-themes($light-theme);
+
+	@include mat.system-level-colors($light-theme);
+	@include mat.system-level-typography($light-theme);
+}

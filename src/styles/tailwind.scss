@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+//material tailwind fixes
+.mdc-notched-outline__notch {
+	border-style: none;
+}
+
+.mat-mdc-icon-button {
+	line-height: normal;
+}
+
+.mat-mdc-form-field-text-prefix {
+	align-self: center;
+	margin-right: 8px;
+}
+.mdc-floating-label.mat-mdc-floating-label {
+	transform: var(
+		--mat-mdc-form-field-label-transform,
+		translateY(-50%) translateX(calc(1 * (24px + var(--mat-mdc-form-field-label-offset-x, 8px))))
+	) !important;
+}

@@ -1,5 +1,12 @@
-<main class="auth-container">
-	<div class="auth-img"></div>
+<main class="h-full w-full xl:flex">
+	<div class="hidden auth-img bg-auth xl:w-1/2 xl:block h-screen bg-cover bg-bottom relative">
+		<h1 class="p-4 z-10 relative text-fix-secondary">itel</h1>
+		<div class="w-full h-full opacity-50 bg-fix-primary absolute top-0 z-0"></div>
+	</div>
 
-	<form class="auth-form"></form>
+	<section
+		class="bg-auth flex flex-col justify-center items-center h-screen p-4 xl:w-1/2 xl:bg-none xl:bg-background relative z-10 bg-cover bg-center"
+	>
+		<app-login-form />
+	</section>
 </main>
