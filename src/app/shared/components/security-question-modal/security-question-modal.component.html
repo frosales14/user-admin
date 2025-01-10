@@ -1,0 +1,63 @@
+<h2 mat-dialog-title>Hi {{ data.name }}</h2>
+<mat-dialog-content class="">
+	<p>Set your security questions</p>
+
+	<form [formGroup]="form" class="grid gap-5 overflow-hidden">
+		@if (step() === 1) {
+			<fieldset class="grid">
+				<mat-form-field [appearance]="'outline'">
+					<mat-label>Security Question # 1</mat-label>
+					<mat-select formControlName="question1">
+						@for (question of securityQuestionList(); track question.questionId) {
+							<mat-option [value]="question.questionId">{{ question.questionText }}</mat-option>
+						}
+					</mat-select>
+				</mat-form-field>
+				<mat-form-field [appearance]="'outline'">
+					<mat-label>Answer # 1</mat-label>
+					<input formControlName="answer1" matInput />
+				</mat-form-field>
+			</fieldset>
+		}
+
+		@if (step() === 2) {
+			<fieldset class="grid">
+				<mat-form-field [appearance]="'outline'">
+					<mat-label>Security Question # 2</mat-label>
+					<mat-select formControlName="question2">
+						@for (question of securityQuestionList(); track question.questionId) {
+							<mat-option [value]="question.questionId">{{ question.questionText }}</mat-option>
+						}
+					</mat-select>
+				</mat-form-field>
+				<mat-form-field [appearance]="'outline'">
+					<mat-label>Answer # 2</mat-label>
+					<input matInput formControlName="answer2" />
+				</mat-form-field>
+			</fieldset>
+		}
+
+		@if (step() === 3) {
+			<fieldset class="grid">
+				<mat-form-field [appearance]="'outline'">
+					<mat-label>Security Question # 3</mat-label>
+					<mat-select formControlName="question3">
+						@for (question of securityQuestionList(); track question.questionId) {
+							<mat-option [value]="question.questionId">{{ question.questionText }}</mat-option>
+						}
+					</mat-select>
+				</mat-form-field>
+				<mat-form-field [appearance]="'outline'">
+					<mat-label>Answer # 3</mat-label>
+					<input matInput formControlName="answer3" />
+				</mat-form-field>
+			</fieldset>
+		}
+
+		<button (click)="onButtonClick()" mat-flat-button type="button">{{ step() !== 3 ? 'next' : 'Save' }}</button>
+	</form>
+</mat-dialog-content>
+<mat-dialog-actions>
+	<!-- <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="animal()" cdkFocusInitial>Ok</button> -->
+</mat-dialog-actions>

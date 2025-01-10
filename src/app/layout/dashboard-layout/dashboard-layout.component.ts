@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, OnInit, signal } from '@angular/core';
 import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -8,6 +8,10 @@ import { SidenavHeaderComponent } from '../components/sidenav-header/sidenav-hea
 import { SidenavMenuComponent } from '../components/sidenav-menu/sidenav-menu.component';
 import { MenuItem } from '../interfaces/menu.interface';
 import { menuItems } from '../constants/menu.constantant';
+import { ThemeToogleComponent } from '../components/theme-toogle/theme-toogle.component';
+import { AfterLoginService } from '../../shared/services/after-login.service';
+import { MatDialog } from '@angular/material/dialog';
+import { SecurityQuestionModalComponent } from '../../shared/components/security-question-modal/security-question-modal.component';
 
 @Component({
 	selector: 'app-dashboard-layout',
@@ -20,6 +24,7 @@ import { menuItems } from '../constants/menu.constantant';
 		MatIconButton,
 		SidenavHeaderComponent,
 		SidenavMenuComponent,
+		ThemeToogleComponent,
 	],
 	templateUrl: './dashboard-layout.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -39,13 +44,44 @@ import { menuItems } from '../constants/menu.constantant';
 
 			mat-sidenav,
 			mat-sidenav-content {
-				transition: all 500ms ease-in-out;
+				transition:
+					width 500ms ease-in-out,
+					margin 500ms ease-in-out;
 			}
 		`,
 	],
 })
-export class DashboardLayoutComponent {
+export class DashboardLayoutComponent implements OnInit {
+	private readonly afterLoginService = inject(AfterLoginService);
+	private readonly dialog = inject(MatDialog);
+
 	collapse = signal<boolean>(false);
 	menuList = signal<MenuItem[]>(menuItems);
 	sidenavWidth = computed(() => (this.collapse() ? '65px' : '250px'));
+
+	ngOnInit(): void {
+		this.getAfterLoginInfo();
+	}
+
+	async getAfterLoginInfo() {
+		const userId = localStorage.getItem('userId');
+
+		if (!userId) return;
+
+		const response = await this.afterLoginService.getAfterLoginInfo(userId);
+
+		this.dialog.open(SecurityQuestionModalComponent, {
+			data: { name: response.adUser.name },
+			disableClose: true,
+			hasBackdrop: true,
+			id: 'questions-modal',
+			width: '70%',
+		});
+
+		if (!response.systemUser.lastLoginAt) {
+			console.log();
+		}
+
+		console.log(response);
+	}
 }

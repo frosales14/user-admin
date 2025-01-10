@@ -1,8 +1,10 @@
-<mat-toolbar class="mat-elevation-z3">
+<mat-toolbar class="mat-elevation-z3 gap-4">
 	<button mat-icon-button (click)="collapse.set(!collapse())">
 		<mat-icon>menu</mat-icon>
 	</button>
 	<span>itel</span>
+	<div class="flex-grow"></div>
+	<app-theme-toogle />
 </mat-toolbar>
 <mat-sidenav-container>
 	<mat-sidenav opened mode="side" #sidenav [style.width]="sidenavWidth()">

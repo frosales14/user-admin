@@ -1,28 +1,48 @@
-<form>
-	<h1 class="font-bold">Welcome!</h1>
+<form [formGroup]="loginForm" class="grid grid-cols-1 grid-rows-2">
+	<span class="block font-bold text-5xl place-self-center justify-self-start">Welcome!</span>
 	<div class="flex flex-col gap-4">
 		<mat-form-field [appearance]="'outline'">
 			<mat-label>Username</mat-label>
 			<mat-icon matTextPrefix color="primary">person_outline</mat-icon>
-			<input type="text" matInput />
+			<input type="text" matInput formControlName="username" />
+			@if (loginForm.controls.username.hasError('required')) {
+				<mat-error>this is a required field *</mat-error>
+			}
 		</mat-form-field>
 
 		<mat-form-field [appearance]="'outline'">
 			<mat-label>Password</mat-label>
 			<mat-icon matTextPrefix color="primary">password</mat-icon>
-			<input type="password" matInput />
+			<input type="password" matInput formControlName="password" />
+			@if (loginForm.controls.password.hasError('required')) {
+				<mat-error>this is a required field *</mat-error>
+			}
 		</mat-form-field>
-		<button type="button" class="w-full xl:w-auto self-end" mat-flat-button color="primary">Login</button>
+
+		<div class="h-6">
+			<span class="text-error text-center m-0 block">{{ errorMessage() }}</span>
+		</div>
+
+		<button
+			[disabled]="loginForm.invalid"
+			type="button"
+			class="w-full"
+			mat-flat-button
+			color="primary"
+			(click)="onSubmit()"
+		>
+			Login
+		</button>
 	</div>
 </form>
 
-<div class="flex items-center mt-4 px-4">
-	<div class="h-0.5 bg-black bg-opacity-40 flex-grow"></div>
+<div class="flex items-center mt-8 xl:mt-12 px-4">
+	<div class="h-0.5 bg-neutral bg-opacity-40 flex-grow"></div>
 	<span class="mx-4">or</span>
-	<div class="h-0.5 bg-black bg-opacity-40 flex-grow"></div>
+	<div class="h-0.5 bg-neutral bg-opacity-40 flex-grow"></div>
 </div>
 
-<div class="flex mt-8 px-4">
+<div class="flex mt-8 xl:mt-12 px-4">
 	<button mat-stroked-button class="border-2 w-full py-2 !rounded-none">
 		<span class="flex gap-4">
 			<img src="images/auth/microsoft.png" alt="microsoft logo" />
@@ -30,5 +50,3 @@
 		</span>
 	</button>
 </div>
-
-<button (click)="changeTheme()">Change Theme</button>

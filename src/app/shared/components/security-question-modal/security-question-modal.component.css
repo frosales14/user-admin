@@ -1,0 +1,7 @@
+:host {
+	display: block;
+}
+
+.mat-mdc-dialog-container#question-modal {
+	@apply w-2/3;
+}

@@ -3,17 +3,17 @@ import { MenuItem } from '../interfaces/menu.interface';
 export const menuItems: MenuItem[] = [
 	{
 		icon: 'data_usage',
-		label: 'graphics',
+		label: 'Dashboard',
 		route: '/graphics',
 	},
 	{
 		icon: 'account_circle',
-		label: 'user',
+		label: 'Active Directory',
 		route: '/dashboard/users',
 	},
 	{
 		icon: 'settings',
-		label: 'configs',
+		label: 'Configs',
 		route: '/config',
 	},
 ];
